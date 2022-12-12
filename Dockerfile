@@ -19,12 +19,11 @@ RUN wget -O ruby-install-0.8.5.tar.gz https://github.com/postmodern/ruby-install
     && cd ruby-install-0.8.5/ \
     && make install
 
-USER app
-WORKDIR /app
-
 ONBUILD ARG RUBY_VERSION
 ONBUILD USER root
 ONBUILD RUN ruby-install --system $RUBY_VERSION
+ONBUILD USER app
+ONBUILD WORKDIR /app
 
 ENV GEM_HOME="$HOME/.gems"
 ENV GEM_PATH="$HOME/.gems${GEM_PATH:+:}$GEM_PATH"
