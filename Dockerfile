@@ -22,7 +22,7 @@ RUN wget -O ruby-install-0.8.5.tar.gz https://github.com/postmodern/ruby-install
 USER app
 WORKDIR /app
 
-ONBUILD ARG RUBY_VERSION=3.1.2
+ONBUILD ARG RUBY_VERSION
 ONBUILD USER root
 ONBUILD RUN ruby-install --system $RUBY_VERSION
 
