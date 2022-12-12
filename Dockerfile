@@ -23,7 +23,7 @@ RUN wget -O ruby-build-$RUBY_BUILD.tar.gz https://github.com/rbenv/ruby-build/ar
 
 ONBUILD ARG RUBY_VERSION
 ONBUILD USER root
-ONBUILD RUN ruby-build $RUBY_VERSION /usr/local
+ONBUILD RUN sh -c "[ ! -z "$RUBY_VERSION" ] && ruby-build $RUBY_VERSION /usr/local || true"
 ONBUILD USER app
 ONBUILD WORKDIR /app
 
