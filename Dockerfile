@@ -14,7 +14,9 @@ RUN apt-get update -qq \
                --shell /bin/bash \
                --home /home/app \
                --gecos "User" \
-               app
+               app \
+    && mkdir /home/app/.gems \
+    && chown app:app /home/app/.gems
 
 ARG RUBY_BUILD=20221206
 RUN wget -O ruby-build-$RUBY_BUILD.tar.gz https://github.com/rbenv/ruby-build/archive/refs/tags/v$RUBY_BUILD.tar.gz \
