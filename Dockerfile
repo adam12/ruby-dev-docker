@@ -8,6 +8,7 @@ RUN apt-get update -qq \
                build-essential \
                zlib1g zlib1g-dev \
                libssl-dev \
+               lsb-release \
     && adduser --quiet \
                --disabled-password \
                --shell /bin/bash \
@@ -21,9 +22,19 @@ RUN wget -O ruby-build-$RUBY_BUILD.tar.gz https://github.com/rbenv/ruby-build/ar
     && cd ruby-build-$RUBY_BUILD/ \
     && ./install.sh
 
+RUN apt install curl ca-certificates gnupg \
+    && curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null \
+    && echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+    && apt-get -qq update
+
 ONBUILD ARG RUBY_VERSION
 ONBUILD USER root
 ONBUILD RUN sh -c "[ ! -z "$RUBY_VERSION" ] && ruby-build $RUBY_VERSION /usr/local || true"
+
+ONBUILD ARG PG_VERSION
+ONBUILD USER root
+ONBUILD RUN sh -c "[ ! -z "$PG_VERSION" ] && apt-get -yq install postgresql-client-$PG_VERSION || true"
+
 ONBUILD USER app
 ONBUILD WORKDIR /app
 
