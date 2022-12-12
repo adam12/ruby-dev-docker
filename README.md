@@ -32,11 +32,11 @@ See `Dockerfile.example` for how this might be used inside your project.
 
 Just to build:
 
-		docker buildx bake
+	docker buildx bake
 
 Build and push to hub.docker.io
 
-		docker buildx bake --push
+	docker buildx bake --push
 
 ## License
 
