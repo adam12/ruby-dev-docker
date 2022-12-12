@@ -7,6 +7,7 @@ RUN apt-get update -qq \
                git \
                build-essential \
                zlib1g zlib1g-dev \
+               libssl-dev \
     && adduser --quiet \
                --disabled-password \
                --shell /bin/bash \
