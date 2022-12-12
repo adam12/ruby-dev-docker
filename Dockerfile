@@ -15,14 +15,15 @@ RUN apt-get update -qq \
                --gecos "User" \
                app
 
-RUN wget -O ruby-install-0.8.5.tar.gz https://github.com/postmodern/ruby-install/archive/v0.8.5.tar.gz \
-    && tar -xzvf ruby-install-0.8.5.tar.gz \
-    && cd ruby-install-0.8.5/ \
-    && make install
+ARG RUBY_BUILD=20221206
+RUN wget -O ruby-build-$RUBY_BUILD.tar.gz https://github.com/rbenv/ruby-build/archive/refs/tags/v$RUBY_BUILD.tar.gz \
+    && tar -xvzf  ruby-build-$RUBY_BUILD.tar.gz \
+    && cd ruby-build-$RUBY_BUILD/ \
+    && ./install.sh
 
 ONBUILD ARG RUBY_VERSION
 ONBUILD USER root
-ONBUILD RUN ruby-install --system $RUBY_VERSION
+ONBUILD RUN ruby-build $RUBY_VERSION /usr/local
 ONBUILD USER app
 ONBUILD WORKDIR /app
 
