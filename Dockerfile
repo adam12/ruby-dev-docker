@@ -33,7 +33,7 @@ ONBUILD RUN sh -c "[ ! -z "$RUBY_VERSION" ] && ruby-build $RUBY_VERSION /usr/loc
 
 ONBUILD ARG PG_VERSION
 ONBUILD USER root
-ONBUILD RUN sh -c "[ ! -z "$PG_VERSION" ] && apt-get -yq install postgresql-client-$PG_VERSION || true"
+ONBUILD RUN sh -c "[ ! -z "$PG_VERSION" ] && apt-get -yq install postgresql-client-$PG_VERSION postgresql-server-dev-$PG_VERSION || true"
 
 ONBUILD USER app
 ONBUILD WORKDIR /app
