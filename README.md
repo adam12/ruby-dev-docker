@@ -28,6 +28,16 @@ differing builds.
 
 See `Dockerfile.example` for how this might be used inside your project.
 
+## Building
+
+Just to build:
+
+		docker buildx bake
+
+Build and push to hub.docker.io
+
+		docker buildx bake --push
+
 ## License
 
 MIT
