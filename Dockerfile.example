@@ -1,4 +1,4 @@
 ARG RUBY_VERSION=2.7.7
 ARG PG_VERSION=9.4
 ARG NODE_MAJOR=18
-FROM ruby-dev
+FROM docker.io/adam12/ruby-dev:latest
