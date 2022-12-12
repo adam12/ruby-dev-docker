@@ -35,6 +35,10 @@ ONBUILD ARG PG_VERSION
 ONBUILD USER root
 ONBUILD RUN sh -c "[ ! -z "$PG_VERSION" ] && apt-get -yq install postgresql-client-$PG_VERSION postgresql-server-dev-$PG_VERSION || true"
 
+ONBUILD ARG NODE_MAJOR
+ONBUILD USER root
+ONBUILD RUN sh -c "[ ! -z "$NODE_MAJOR" ] && (curl -fsSL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash - && apt-get install -y nodejs) || true"
+
 ONBUILD USER app
 ONBUILD WORKDIR /app
 
