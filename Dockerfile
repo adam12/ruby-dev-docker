@@ -27,6 +27,6 @@ ONBUILD RUN ruby-build $RUBY_VERSION /usr/local
 ONBUILD USER app
 ONBUILD WORKDIR /app
 
-ENV GEM_HOME="$HOME/.gems"
-ENV GEM_PATH="$HOME/.gems${GEM_PATH:+:}$GEM_PATH"
-ENV PATH="$HOME/.gems/bin${PATH:+:}$PATH"
+ENV GEM_HOME="/home/app/.gems"
+ENV GEM_PATH="/home/app/.gems${GEM_PATH:+:}$GEM_PATH"
+ENV PATH="/home/app/.gems/bin${PATH:+:}$PATH"
