@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq \
     && apt-get install -y \
                curl \
@@ -9,6 +10,7 @@ RUN apt-get update -qq \
                zlib1g zlib1g-dev \
                libssl-dev \
                lsb-release \
+               tzdata \
     && adduser --quiet \
                --disabled-password \
                --shell /bin/bash \
